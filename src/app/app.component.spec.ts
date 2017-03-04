@@ -1,15 +1,43 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { PageComponent } from './page/page.component';
+import { InspectorComponent } from './inspector/inspector.component';
+
+import { NgRedux, DevToolsExtension } from '@angular-redux/store';
+
+import { Observable } from 'rxjs';
+
+import {
+  StateActions,
+  ApplicationState,
+  INITIAL_STATE,
+  rootReducer
+} from './state';
+
+import { ReduxHelper } from './spec/redux.helper';
+import { MockJQuery } from './spec/jquery.helper';
+
 
 describe('AppComponent', () => {
-  beforeEach(() => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        PageComponent,
+        InspectorComponent
       ],
-    });
-    TestBed.compileComponents();
-  });
+      imports: [],
+      providers: [
+        StateActions,
+        ReduxHelper.provideNgRedux,
+        MockJQuery.provideJQuery
+      ],
+    });//.compileComponents();
+  }));
+
 
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -17,16 +45,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
 });

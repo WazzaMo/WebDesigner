@@ -3,7 +3,11 @@ import { ElementRef } from '@angular/core';
 
 declare var jQuery : any;
 
-export class JQueryElement {
+export interface JQueryElement {
+    find(selector: string) : any;
+}
+
+export class JQueryElementImpl implements JQueryElement {
     private jQueryElement: any;
 
     constructor(private element: ElementRef) {
@@ -12,5 +16,11 @@ export class JQueryElement {
 
     public find(selector: string) : any {
         return this.jQueryElement.find(selector);
+    }
+}
+
+export class JQueryElementFactory {
+    createJQueryElement(element: ElementRef) : JQueryElement {
+        return new JQueryElementImpl(element);
     }
 }

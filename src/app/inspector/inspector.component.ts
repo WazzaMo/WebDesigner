@@ -1,9 +1,15 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
+import { NgRedux } from '@angular-redux/store';
 
+import {
+  ApplicationState,
+  ObjectSelection
+} from '../state';
 
 @Component({
   selector: 'design-inspector',
@@ -13,11 +19,22 @@ import {
 export class InspectorComponent implements OnInit {
   private colors = ['red', 'green', 'blue', 'white', 'grey'];
   private colorIndex: number = 0;
+  private subscription;
+  private selectedObject: ObjectSelection;
 
-  constructor() {}
+  constructor(
+    private ngRedux: NgRedux<ApplicationState>
+  ) {
+    this.subscription = ngRedux.select<ObjectSelection>('selected')
+    .subscribe()
+  }
 
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+
   }
 
   onChangeColor() : void {

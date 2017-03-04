@@ -1,6 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MockJQuery } from '../spec/jquery.helper';
+import { ReduxHelper } from '../spec/redux.helper';
+
+import {
+  StateActions,
+  ApplicationState,
+  INITIAL_STATE,
+  rootReducer
+} from '../state';
+
 import { PageComponent } from './page.component';
+
 
 describe('PageComponent', () => {
   let component: PageComponent;
@@ -8,9 +19,16 @@ describe('PageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        PageComponent
+      ],
+      imports: [],
+      providers: [
+        StateActions,
+        ReduxHelper.provideNgRedux,
+        MockJQuery.provideJQuery
+      ],
+    });//.compileComponents();
   }));
 
   beforeEach(() => {

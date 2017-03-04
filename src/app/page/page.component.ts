@@ -4,8 +4,13 @@ import {
   ElementRef 
 } from '@angular/core';
 
-import { JQueryElement } from '../jquery-element';
+import { NgRedux } from '@angular-redux/store';
 
+import { JQueryElement, JQueryElementFactory } from '../jquery-element';
+import { StateActions } from '../state/state.actions';
+import { Options } from '../state/options';
+import { ObjectSelection } from '../state/selection';
+import { ApplicationState } from '../state/application-state';
 
 @Component({
   selector: 'design-page',
@@ -17,15 +22,24 @@ export class PageComponent implements OnInit {
   private pageRoot : any;
   private firstDiv : any;
 
-  constructor(private pageElement: ElementRef) { }
+  constructor(
+    private ngRedux: NgRedux<ApplicationState>,
+    private pageElement: ElementRef,
+    private jqueryFactory : JQueryElementFactory,
+    private stateActions: StateActions
+  ) { }
 
   ngOnInit() {
-    this._templateRoot = new JQueryElement(this.pageElement);
+    this._templateRoot = this.jqueryFactory.createJQueryElement(this.pageElement);
     this.pageRoot = this._templateRoot.find('#page');
     this.firstDiv = this.pageRoot.find('div');
   }
 
   public setColor(color: string) : void {
     this.firstDiv.css('color', color);
+  }
+
+  public clickedObject(name: string, options: Options) {
+    this.ngRedux.dispatch( this.stateActions.select(<ObjectSelection>{name: name, options: options}) );
   }
 }
