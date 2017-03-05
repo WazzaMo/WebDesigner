@@ -1,3 +1,6 @@
 <div id="Inspector">
+  <div class="InspectorView" *ngIf="hasSelected()">
+    <span>{{selectedObject.name}}</span>
+  </div>
   <button (click)="onChangeColor()">Change Color</button>
 </div>

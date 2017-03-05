@@ -10,13 +10,29 @@
 import { NgRedux, DevToolsExtension } from '@angular-redux/store';
 export { NgRedux, DevToolsExtension } from '@angular-redux/store';
 
-const MockObservable = {
-    subscribe: function() : void {}
+const MockSubscription = {
+    closed: true,
+    
+    remove(subscription:any): void {},
+    add(tearDown:any): any {return MockSubscription},
+    unsubscribe() : void {
+        console.debug('MockSubscription: unsubscribe called');
+    }
 }
 
-const MockRedux  = {
-    dispatch: function() {},
-    select: function() {
+const MockObservable = {
+    subscribe<T>( task: (value: any) => void ) : any {
+        console.debug("MockObservable returning MockSubscription");
+        debugger;
+        return MockSubscription;
+    }
+}
+
+const MockRedux = {
+    dispatch: () => {},
+
+    select<T>(selector: any) : any {
+        console.debug("Returning MockObservable: " );
         return MockObservable;
     }
 }

@@ -1,7 +1,8 @@
 
-import { ElementRef } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 
 declare var jQuery : any;
+
 
 export interface JQueryElement {
     find(selector: string) : any;
@@ -19,6 +20,7 @@ export class JQueryElementImpl implements JQueryElement {
     }
 }
 
+@Injectable()
 export class JQueryElementFactory {
     createJQueryElement(element: ElementRef) : JQueryElement {
         return new JQueryElementImpl(element);

@@ -9,41 +9,10 @@
 
 import { Options, copyOptions } from './options';
 
-import { Value } from '../spec/value.helper';
+import { Value, getNumberOfProperties } from '../spec/value.helper';
 
-function getNumberOfProperties(someObject: Object) : number {
-    let count = 0;
-    for(let item in someObject) {
-        count++;
-    }
-    return count;
-}
+import { an_option, allArrayValuesMatch, allOptionsAreMatched } from './option.helpers';
 
-function an_option() : Options {
-    let some_options : Options = {};
-    Value.do_a_number_of_times( id => {
-        let name = Value.a_string();
-        while(some_options[name] != undefined) {
-            name = Value.a_string();
-        }
-        some_options[name] = Value.a_string_array();
-    });
-    return some_options;
-}
-
-function arrayMatch(someStrings: Array<string>, otherStrings: Array<string>) : boolean {
-    return someStrings.join() == otherStrings.join();
-}
-
-function allOptionsAreMatched(first: Options, second: Options): boolean {
-    for(let optionName in first) {
-        let firstValues = first[optionName];
-        let secondValues = second[optionName];
-        if (second === undefined) return false;
-        if (! arrayMatch(firstValues, secondValues)) return false;
-    }
-    return true;
-}
 
 describe('Options', () => {
     describe('copyOptions', () => {
@@ -78,7 +47,7 @@ describe('Options', () => {
                     let subjectItem = subject[item];
                     let sourceItem = source[item];
                     console.debug(`For item ${item} : source = ${sourceItem} and copy = ${subjectItem}`);
-                    expect(arrayMatch(subjectItem, sourceItem)).toBeTruthy();
+                    expect(allArrayValuesMatch(subjectItem, sourceItem)).toBeTruthy();
                 }
             });
         })

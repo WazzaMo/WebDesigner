@@ -35,7 +35,7 @@ describe('AppComponent', () => {
         ReduxHelper.provideNgRedux,
         MockJQuery.provideJQuery
       ],
-    });//.compileComponents();
+    });
   }));
 
 

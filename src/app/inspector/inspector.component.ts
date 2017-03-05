@@ -1,3 +1,12 @@
+/*
+ * (c) Copyright 2017 Warwick Molloy
+ *
+ * Licence: GNU Public Licence version 3
+ * See LICENCE.md in project directory
+ * See https://www.gnu.org/licenses/lgpl.md
+ */
+
+
 import {
   Component,
   OnInit,
@@ -8,8 +17,12 @@ import { NgRedux } from '@angular-redux/store';
 
 import {
   ApplicationState,
-  ObjectSelection
+  ObjectSelection,
+  copySelection
 } from '../state';
+
+import { Observable, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'design-inspector',
@@ -19,22 +32,29 @@ import {
 export class InspectorComponent implements OnInit {
   private colors = ['red', 'green', 'blue', 'white', 'grey'];
   private colorIndex: number = 0;
-  private subscription;
+  private subscription : Subscription;
   private selectedObject: ObjectSelection;
 
   constructor(
     private ngRedux: NgRedux<ApplicationState>
-  ) {
-    this.subscription = ngRedux.select<ObjectSelection>('selected')
-    .subscribe()
-  }
+  ) {}
 
 
   ngOnInit() {
+    this.subscription = this.ngRedux.select<ObjectSelection>('selected')
+      .subscribe(selectedValue => this.selectedObject = copySelection(selectedValue));
   }
 
   ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    } else {
+      console.debug('No subscription to clean up');
+    }
+  }
 
+  hasSelected() : boolean {
+    return this.selectedObject != undefined;
   }
 
   onChangeColor() : void {

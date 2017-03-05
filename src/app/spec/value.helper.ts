@@ -34,10 +34,19 @@ export function for_some_number( action: ActionThing) : number {
     return volume;
 }
 
+export function getNumberOfProperties(someObject: Object) : number {
+    let count = 0;
+    for(let item in someObject) {
+        count++;
+    }
+    return count;
+}
+
 
 export const Value = {
     a_number: number_val,
     a_string: string_val,
     a_string_array: stringArray_val,
-    do_a_number_of_times: for_some_number
+    do_a_number_of_times: for_some_number,
+    get_number_properties: getNumberOfProperties
 }

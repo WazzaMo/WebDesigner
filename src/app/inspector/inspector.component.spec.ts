@@ -27,7 +27,7 @@ describe('InspectorComponent', () => {
         StateActions,
         ReduxHelper.provideNgRedux
       ],
-    });//.compileComponents();
+    });
   }));
 
 
