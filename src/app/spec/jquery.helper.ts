@@ -1,3 +1,10 @@
+/*
+ * (c) Copyright 2017 Warwick Molloy
+ *
+ * Licence: Lesser GNU Public Licence version 3
+ * See LGPL-LICENCE.md in same directory, or
+ * See https://www.gnu.org/licenses/lgpl-3.0.en.html
+ */
 
 import { ElementRef } from '@angular/core';
 import { JQueryElement, JQueryElementFactory } from '../jquery-element';

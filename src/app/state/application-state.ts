@@ -1,5 +1,5 @@
 
-import { ObjectSelection } from './selection';
+import { ObjectSelection } from './object-selection';
 
 export interface ApplicationState {
     selected: ObjectSelection;

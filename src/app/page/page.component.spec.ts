@@ -28,7 +28,7 @@ describe('PageComponent', () => {
         ReduxHelper.provideNgRedux,
         MockJQuery.provideJQuery
       ],
-    });//.compileComponents();
+    });
   }));
 
   beforeEach(() => {

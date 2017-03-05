@@ -3,7 +3,7 @@ import { Action } from 'redux';
 
 import { Options } from './options';
 import { SelectionAction } from './selection-action';
-import { ObjectSelection } from './selection';
+import { ObjectSelection } from './object-selection';
 
 @Injectable()
 export class StateActions {

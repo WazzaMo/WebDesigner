@@ -9,7 +9,7 @@ import { NgRedux } from '@angular-redux/store';
 import { JQueryElement, JQueryElementFactory } from '../jquery-element';
 import { StateActions } from '../state/state.actions';
 import { Options } from '../state/options';
-import { ObjectSelection } from '../state/selection';
+import { ObjectSelection } from '../state/object-selection';
 import { ApplicationState } from '../state/application-state';
 
 @Component({
