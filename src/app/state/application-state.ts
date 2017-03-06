@@ -7,8 +7,8 @@
  */
 
 
-import { ObjectSelection } from './object-selection';
+import { EntitySelection } from './entity-selection';
 
 export interface ApplicationState {
-    selected: ObjectSelection;
+    selected: EntitySelection;
 }

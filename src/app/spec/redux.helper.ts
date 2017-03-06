@@ -23,7 +23,6 @@ const MockSubscription = {
 const MockObservable = {
     subscribe<T>( task: (value: any) => void ) : any {
         console.debug("MockObservable returning MockSubscription");
-        debugger;
         return MockSubscription;
     }
 }

@@ -7,7 +7,17 @@
  */
 
 import { ElementRef } from '@angular/core';
-import { JQueryElement, JQueryElementFactory } from '../jquery-element';
+import { JQueryElement, JQueryElementFactory } from '../jquery/jquery-element';
+
+export const jQueryFind = jasmine.createSpy('find');
+
+export const jQuery = function() {
+    return {
+        find: jQueryFind
+    };
+}
+window['jQuery'] = jQuery;
+
 
 let mockFind = function defaultMockFind(selector: string) : any {
     return { info: '-defaultMockFind value' };

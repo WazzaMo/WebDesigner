@@ -15,11 +15,14 @@ import {
 
 import { NgRedux } from '@angular-redux/store';
 
-import { JQueryElement, JQueryElementFactory } from '../jquery-element';
+import { JQueryElement, JQueryElementFactory } from '../jquery/jquery-element';
 import { StateActions } from '../state/state.actions';
 import { Options } from '../state/options';
-import { ObjectSelection } from '../state/object-selection';
-import { ApplicationState } from '../state/application-state';
+
+import { 
+  EntitySelection,
+  ApplicationState
+} from '../state';
 
 @Component({
   selector: 'design-page',
@@ -49,6 +52,6 @@ export class PageComponent implements OnInit {
   }
 
   public clickedObject(name: string, options: Options) {
-    this.ngRedux.dispatch( this.stateActions.select(<ObjectSelection>{name: name, options: options}) );
+    this.ngRedux.dispatch( this.stateActions.select(<EntitySelection>{name: name, options: options}) );
   }
 }

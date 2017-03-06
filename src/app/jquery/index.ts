@@ -6,9 +6,12 @@
  * See https://www.gnu.org/licenses/lgpl.md
  */
 
-import { Action } from 'redux';
-import { EntitySelection } from './entity-selection';
+export {
+    JQueryNode
+} from './jquery-node';
 
-export interface SelectionAction extends Action {
-    value: EntitySelection;
-}
+export {
+    JQueryElement,
+    JQueryElementFactory,
+    JQueryElementImpl
+} from './jquery-element';

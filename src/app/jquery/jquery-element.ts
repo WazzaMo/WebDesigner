@@ -1,5 +1,19 @@
+/*
+ * (c) Copyright 2017 Warwick Molloy
+ *     Lokel Digital Pty Ltd
+ *
+ * Licence: GNU Public Licence version 3
+ * See LICENCE.md in project directory
+ * See https://www.gnu.org/licenses/lgpl.md
+ */
+
 
 import { ElementRef, Injectable } from '@angular/core';
+
+import {
+    JQueryNode
+} from './jquery-node';
+
 
 declare var jQuery : any;
 

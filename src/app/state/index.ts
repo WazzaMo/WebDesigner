@@ -13,7 +13,7 @@ export { Options } from './options';
 
 export { SelectionAction } from './selection-action';
 
-export { ObjectSelection, copySelection } from './object-selection';
+export { EntitySelection, copySelection } from './entity-selection';
 
 export { StateActions } from './state.actions';
 
