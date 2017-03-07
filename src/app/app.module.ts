@@ -22,7 +22,7 @@ import { ApplicationState } from './state/application-state';
 import { rootReducer, INITIAL_STATE } from './state/store';
 import { StateActions } from './state/state.actions';
 
-import { JQueryElement, JQueryElementImpl, JQueryElementFactory } from './jquery-element';
+import { JQueryElement, JQueryElementImpl, JQueryElementFactory } from './jquery/jquery-element';
 
 @NgModule({
   declarations: [

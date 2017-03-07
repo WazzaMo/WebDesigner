@@ -7,20 +7,20 @@
  */
 
 import { Options, copyOptions } from './options';
-import { ObjectSelection, copySelection } from './object-selection';
+import { EntitySelection, copySelection } from './entity-selection';
 
 import { Value } from '../spec/value.helper';
 import { an_option, allOptionsAreMatched } from './option.helpers';
 
 
 
-describe('ObjectSelection', () =>{
+describe('EntitySelection', () =>{
     describe('copySelection', () => {
-        let source: ObjectSelection;
-        let subject: () => ObjectSelection;
+        let source: EntitySelection;
+        let subject: () => EntitySelection;
 
         beforeAll(()=> {
-            source = new ObjectSelection(Value.a_string(),an_option());
+            source = new EntitySelection(Value.a_string(),an_option());
             subject = () => {
                 let copy = copySelection(source);
                 return copy;

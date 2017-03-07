@@ -1,5 +1,16 @@
-# Webdsn
+# WebDesigner
 
+## An Interactive Design Tool
+Interactively determine the CSS tags needed to achieve the style or look needed.
+
+The concept is to allow design of CSS attributes on `<div>` tags interactively
+and then be able to use copy/paste the CSS attributes elsewhere.
+
+### Layout
+The left panel is the 'page' and the right panel is the 'inspector.'
+
+
+# Running WebDesigner
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
 
 ## Development server

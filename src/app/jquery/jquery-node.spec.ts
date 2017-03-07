@@ -6,9 +6,9 @@
  * See https://www.gnu.org/licenses/lgpl.md
  */
 
-import { Action } from 'redux';
-import { EntitySelection } from './entity-selection';
 
-export interface SelectionAction extends Action {
-    value: EntitySelection;
-}
+import {
+    jQueryFind,
+    jQuery
+} from '../spec/jquery.helper';
+

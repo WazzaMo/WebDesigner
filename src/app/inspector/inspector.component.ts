@@ -17,7 +17,7 @@ import { NgRedux } from '@angular-redux/store';
 
 import {
   ApplicationState,
-  ObjectSelection,
+  EntitySelection,
   copySelection
 } from '../state';
 
@@ -33,7 +33,7 @@ export class InspectorComponent implements OnInit {
   private colors = ['red', 'green', 'blue', 'white', 'grey'];
   private colorIndex: number = 0;
   private subscription : Subscription;
-  private selectedObject: ObjectSelection;
+  private selectedObject: EntitySelection;
 
   constructor(
     private ngRedux: NgRedux<ApplicationState>
@@ -41,7 +41,7 @@ export class InspectorComponent implements OnInit {
 
 
   ngOnInit() {
-    this.subscription = this.ngRedux.select<ObjectSelection>('selected')
+    this.subscription = this.ngRedux.select<EntitySelection>('selected')
       .subscribe(selectedValue => this.selectedObject = copySelection(selectedValue));
   }
 

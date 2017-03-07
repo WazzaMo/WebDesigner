@@ -9,7 +9,7 @@
 
 import { Options, copyOptions } from './options';
 
-export class ObjectSelection {
+export class EntitySelection {
     name: string;
     options: Options;
 
@@ -19,8 +19,8 @@ export class ObjectSelection {
     }
 }
 
-export function copySelection(source: ObjectSelection) : ObjectSelection {
-    return <ObjectSelection>{
+export function copySelection(source: EntitySelection) : EntitySelection {
+    return <EntitySelection>{
         name: source.name,
         options: copyOptions(source.options)
     };
