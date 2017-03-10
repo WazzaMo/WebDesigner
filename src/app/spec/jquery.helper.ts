@@ -9,14 +9,27 @@
 import { ElementRef } from '@angular/core';
 import { JQueryElement, JQueryElementFactory } from '../jquery/jquery-element';
 
-export const jQueryFind = jasmine.createSpy('find');
+export var jQueryFind: any;
+export var jQueryCss: any;
+export var jQuery: any;
 
-export const jQuery = function() {
-    return {
-        find: jQueryFind
-    };
+export interface SetupValues {
+    find_result: Array<any>;
 }
-window['jQuery'] = jQuery;
+
+const DEFAULT_SETUP : SetupValues = {
+    find_result: []
+}
+
+export function setupJQueryMock(values: SetupValues = DEFAULT_SETUP) {
+    jQueryFind = jasmine.createSpy('find').and.returnValue(values.find_result);
+    jQueryCss = jasmine.createSpy('css');
+    jQuery = jasmine.createSpy('jQuery').and.returnValue({
+        find: jQueryFind,
+        css: jQueryCss
+    });
+    window['jQuery'] = jQuery;
+}
 
 
 let mockFind = function defaultMockFind(selector: string) : any {

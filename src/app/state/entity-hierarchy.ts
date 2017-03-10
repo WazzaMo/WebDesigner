@@ -7,31 +7,43 @@
  */
 
 import { JQueryElement } from '../jquery/jquery-element';
+import { Entity } from './entity';
 
 export interface EntityComponent {
 
 }
 
-export class EntityItem {
-    private name: string;
-    private id: number;
-    private children: Array<EntityItem>;
-
-    constructor(
-        newName: string,
-        newId: number
-    ) {
-        this.name = newName;
-        this.id = newId;
-        this.children = [];
-    }
-
-    isParent() : boolean {
-        return this.children.length > 0;
-    }
-}
 
 export class EntityHierarchy {
-    private nextId : number;
+    private root: Entity;
+    private idToEntity: Array<Entity>;
 
+    public constructor() {
+        this.root = new Entity('root', 0);
+        this.idToEntity[0] = this.root;
+    }
+
+    public static copyFrom(other: EntityHierarchy) : EntityHierarchy {
+        if (typeof other === 'undefined') {
+            return undefined;
+        } else {
+            let copy = new EntityHierarchy();
+            copy.root = Entity.copyFrom(other.root);
+            copy.root.forAll( entity => copy.idToEntity[entity.getId()] = entity );
+            return copy;
+        }
+    }
+
+    public static addEntity(
+        name: string, parentId: number, toHierarchy: EntityHierarchy
+    ) : EntityHierarchy {
+        let hierarchy = EntityHierarchy.copyFrom(toHierarchy);
+        let parentEntity = hierarchy.idToEntity[parentId];
+        hierarchy.idToEntity.push(parentEntity.add(name, hierarchy.getNextId()));
+        return hierarchy;
+    }
+
+    private getNextId() : number {
+        return this.idToEntity.length;
+    }
 }

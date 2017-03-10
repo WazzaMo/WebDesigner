@@ -19,18 +19,18 @@ declare var jQuery : any;
 
 
 export interface JQueryElement {
-    find(selector: string) : any;
+    find(selector: string) : Array<JQueryNode>;
 }
 
 export class JQueryElementImpl implements JQueryElement {
-    private jQueryElement: any;
+    private jQueryNode: JQueryNode;
 
     constructor(private element: ElementRef) {
-        this.jQueryElement = jQuery(element.nativeElement);
+        this.jQueryNode = jQuery(element.nativeElement);
     }
 
-    public find(selector: string) : any {
-        return this.jQueryElement.find(selector);
+    public find(selector: string) : Array<JQueryNode> {
+        return this.jQueryNode.find(selector);
     }
 }
 
