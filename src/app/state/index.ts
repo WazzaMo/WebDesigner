@@ -7,15 +7,13 @@
  */
 
 
-export { ApplicationState } from './application-state';
-
-export { Options } from './options';
-
-export { SelectionAction } from './selection-action';
-
-export { EntitySelection, copySelection } from './entity-selection';
-
-export { StateActions } from './state.actions';
+export * from './application-state';
+export * from './options';
+export * from './selection-action';
+export * from './entity-selection';
+export * from './entity';
+export * from './entity-hierarchy';
+export * from './state.actions';
 
 export {
     INITIAL_STATE,

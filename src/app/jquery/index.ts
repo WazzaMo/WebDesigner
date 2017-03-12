@@ -6,12 +6,8 @@
  * See https://www.gnu.org/licenses/lgpl.md
  */
 
-export {
-    JQueryNode
-} from './jquery-node';
+export * from './jquery-node';
 
-export {
-    JQueryElement,
-    JQueryElementFactory,
-    JQueryElementImpl
-} from './jquery-element';
+export * from './jquery-element';
+
+export * from './jquery-tools';

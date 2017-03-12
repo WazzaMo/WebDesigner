@@ -20,7 +20,7 @@ export class EntityHierarchy {
 
     public constructor() {
         this.root = new Entity('root', 0);
-        this.idToEntity[0] = this.root;
+        this.idToEntity= [this.root];
     }
 
     public static copyFrom(other: EntityHierarchy) : EntityHierarchy {
@@ -41,6 +41,10 @@ export class EntityHierarchy {
         let parentEntity = hierarchy.idToEntity[parentId];
         hierarchy.idToEntity.push(parentEntity.add(name, hierarchy.getNextId()));
         return hierarchy;
+    }
+
+    public forAll(traverser: (entity:Entity, depth: number) => void) : void {
+        this.root.forAll(traverser, 0);
     }
 
     private getNextId() : number {

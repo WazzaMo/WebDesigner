@@ -7,12 +7,17 @@
  */
 
 
-import { EntitySelection } from './entity-selection';
+import { Injectable } from '@angular/core';
+import { Action } from 'redux';
+
 import { Entity } from './entity';
 import { EntityHierarchy } from './entity-hierarchy';
 
+export enum HierarchyActionKind {
+    ADD_TO_SELECTED,
+    REMOVE_SELECTED
+}
 
-export interface ApplicationState {
-    selected: EntitySelection;
-    hierarchy: EntityHierarchy;
+export interface HierarchyAction extends Action {
+    actionKind: HierarchyActionKind;
 }

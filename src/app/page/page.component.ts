@@ -15,13 +15,21 @@ import {
 
 import { NgRedux } from '@angular-redux/store';
 
-import { JQueryElement, JQueryElementFactory } from '../jquery/jquery-element';
+import {
+  JQueryElement, JQueryElementFactory,
+  JQueryNode, 
+  JQueryOperators,
+  NullJQueryNode
+} from '../jquery';
+
 import { StateActions } from '../state/state.actions';
 import { Options } from '../state/options';
 
 import { 
   EntitySelection,
-  ApplicationState
+  ApplicationState,
+  Entity,
+  EntityHierarchy
 } from '../state';
 
 @Component({
@@ -31,8 +39,8 @@ import {
 })
 export class PageComponent implements OnInit {
   private _templateRoot: JQueryElement;
-  private pageRoot : any;
-  private firstDiv : any;
+  private pageRoot : Array<JQueryNode>;
+  private firstDiv : JQueryNode;
 
   constructor(
     private ngRedux: NgRedux<ApplicationState>,
@@ -44,7 +52,13 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this._templateRoot = this.jqueryFactory.createJQueryElement(this.pageElement);
     this.pageRoot = this._templateRoot.find('#page');
-    this.firstDiv = this.pageRoot.find('div');
+    if (this.pageRoot.length) {
+      let theDivs = this.pageRoot[0].find('div');
+      this.firstDiv = theDivs.length > 0 ? theDivs[0] : new NullJQueryNode();
+    } else {
+      this.firstDiv = new NullJQueryNode();
+      console.error("page.component.html is missing an element with id #page");
+    }
   }
 
   public setColor(color: string) : void {

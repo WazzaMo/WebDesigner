@@ -13,12 +13,30 @@ import { Action } from 'redux';
 import { Options } from './options';
 import { SelectionAction } from './selection-action';
 import { EntitySelection } from './entity-selection';
+import { HierarchyAction, HierarchyActionKind } from './hierarchy-action';
 
 @Injectable()
 export class StateActions {
     static SELECTION = 'SELECTION';
+    static HIERARCHY = 'HIERARCHY';
 
     select(selection: EntitySelection) : SelectionAction {
-        return { type: StateActions.SELECTION, value: selection };
+        return {
+            type: StateActions.SELECTION,
+            value: selection
+        };
+    }
+
+    addToSelectedEntity() : HierarchyAction {
+        return {
+            type: StateActions.HIERARCHY,
+            actionKind: HierarchyActionKind.ADD_TO_SELECTED
+        };
+    }
+    removeSelectedEntity() : HierarchyAction {
+        return {
+            type: StateActions.HIERARCHY,
+            actionKind: HierarchyActionKind.REMOVE_SELECTED
+        };
     }
 }
