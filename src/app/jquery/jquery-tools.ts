@@ -60,7 +60,7 @@ function SafeFindFirstFromElement(
 ): JQueryNode {
     let node: any = getFirstOfList(element.find(selector), doThisIfEmpty);
     if (node.constructor.name != 'NullJQueryNode') {
-        return new JQueryNodeImpl(node);
+        return node;
     }
     return node;
 }

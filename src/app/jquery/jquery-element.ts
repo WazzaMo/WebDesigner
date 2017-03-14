@@ -11,7 +11,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 
 import {
-    JQueryNode
+    JQueryNode, JQueryNodeImpl, NullJQueryNode
 } from './jquery-node';
 
 
@@ -26,7 +26,8 @@ export class JQueryElementImpl implements JQueryElement {
     private jQueryNode: JQueryNode;
 
     constructor(private element: ElementRef) {
-        this.jQueryNode = jQuery(element.nativeElement);
+        let jqueryElement = jQuery(element.nativeElement);
+        this.jQueryNode = new JQueryNodeImpl(jqueryElement);
     }
 
     public find(selector: string) : Array<JQueryNode> {

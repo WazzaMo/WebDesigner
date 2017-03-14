@@ -113,8 +113,7 @@ describe('JQueryTools.findFirst', ()=>{
                     find_result: [expected_node, 'other-node']
                 }
                 setupJQueryMock(setup);
-                element = <ElementRef><any>'an-element';
-                debugger;
+                element = <ElementRef><any> { nativeElement: 'an-element'};
                 parentElement = new JQueryElementFactory().createJQueryElement(element);
                 value = JQueryTools.findFirst(parentElement, 'selector');
             })

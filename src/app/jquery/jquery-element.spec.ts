@@ -9,7 +9,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 
 import {
-    JQueryNode
+    JQueryNode, JQueryNodeImpl
 } from './jquery-node';
 
 import {
@@ -45,6 +45,8 @@ class JQueryNodeMock implements JQueryNode {
     getNode() : any {
         return {};
     }
+
+    isEmpty() : boolean { return false; }
 }
     
 describe('JQueryElementImpl', () => {
@@ -59,23 +61,20 @@ describe('JQueryElementImpl', () => {
         let element: ElementRef;
         let mockRootNode: JQueryNodeMock;
         let mockChildNode: JQueryNodeMock;
+        let constructor: jasmine.Spy;
 
         beforeEach( () => {
             mockChildNode = new JQueryNodeMock();
             mockRootNode = new JQueryNodeMock([mockChildNode]);
-            element = jasmine.createSpyObj('ElementRef',[{'nativeElement': mockRootNode}]);
-            setupJQueryMock({find_result: [mockChildNode] })
+            constructor = spyOn(JQueryNodeImpl, 'constructor').and.callThrough();
+            element = {'nativeElement': 'root-node'};
+            setupJQueryMock({find_result: [element] })
             subject = new JQueryElementImpl(element);
         })
 
         it('attempts to find the given selector', () => {
             subject.find(selector)
             expect(jQueryFind).toHaveBeenCalledWith(selector);
-        })
-
-        it('returns the child node', () => {
-            let result = subject.find(selector);
-            expect(result[0]).toBe(mockChildNode);
         })
     });
 })
