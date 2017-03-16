@@ -11,6 +11,7 @@ export * from './application-state';
 export * from './options';
 export * from './selection-action';
 export * from './entity-selection';
+export * from './entity-component';
 export * from './entity';
 export * from './entity-hierarchy';
 export * from './state.actions';

@@ -6,12 +6,21 @@
  * See https://www.gnu.org/licenses/lgpl.md
  */
 
+import { EntityComponent } from './entity-component';
 
+
+export interface ViewEntity {
+    name: string;
+    id: number;
+    children: Array<ViewEntity>;
+    components: Array<EntityComponent>;
+}
 
 export class Entity {
     private name: string;
     private id: number;
     private children: Array<Entity>;
+    private components: Array<EntityComponent>;
 
     constructor(
         newName: string,
@@ -29,6 +38,25 @@ export class Entity {
             value.children.push(child);
         });
         return value;
+    }
+
+    public static makeHierarchyView(other: Entity) : ViewEntity {
+        let root: ViewEntity = {name: other.name, id: other.id, children: [], components:[]};
+        other.children.forEach(item => {
+            let child:ViewEntity = Entity.makeHierarchyView(item);
+            root.children.push(child);
+        });
+        return root;
+    }
+
+    public static makeRenderView(other: Entity) : ViewEntity {
+        let view : ViewEntity = {
+            name: other.name,
+            id: other.id,
+            children: [],
+            components: other.components
+        };
+        return view;
     }
 
     public add(name: string, id: number) : Entity {

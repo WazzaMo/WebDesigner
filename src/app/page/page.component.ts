@@ -18,7 +18,7 @@ import { NgRedux } from '@angular-redux/store';
 import {
   JQueryElement, JQueryElementFactory,
   JQueryNode, 
-  JQueryOperators,
+  JQueryTools,
   NullJQueryNode
 } from '../jquery';
 
@@ -29,8 +29,11 @@ import {
   EntitySelection,
   ApplicationState,
   Entity,
-  EntityHierarchy
+  EntityHierarchy,
+  ViewEntity
 } from '../state';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'design-page',
@@ -41,6 +44,8 @@ export class PageComponent implements OnInit {
   private _templateRoot: JQueryElement;
   private pageRoot : Array<JQueryNode>;
   private firstDiv : JQueryNode;
+  private reduxSubscription: Subscription;
+  private entityViews: Array<ViewEntity>;
 
   constructor(
     private ngRedux: NgRedux<ApplicationState>,
@@ -52,6 +57,10 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this._templateRoot = this.jqueryFactory.createJQueryElement(this.pageElement);
     this.pageRoot = this._templateRoot.find('#page');
+    this.getPage();
+  }
+
+  private getPage() : void {
     if (this.pageRoot.length) {
       let theDivs = this.pageRoot[0].find('div');
       this.firstDiv = theDivs.length > 0 ? theDivs[0] : new NullJQueryNode();
@@ -59,6 +68,11 @@ export class PageComponent implements OnInit {
       this.firstDiv = new NullJQueryNode();
       console.error("page.component.html is missing an element with id #page");
     }
+  }
+
+  private setupForRedux() :void {
+    this.reduxSubscription = this.ngRedux.select<EntityHierarchy>('hierarchy')
+      .subscribe( hierarchyValue => this.entityViews = EntityHierarchy.makeRenderView(hierarchyValue));
   }
 
   public setColor(color: string) : void {

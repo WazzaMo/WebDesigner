@@ -7,11 +7,7 @@
  */
 
 import { JQueryElement } from '../jquery/jquery-element';
-import { Entity } from './entity';
-
-export interface EntityComponent {
-
-}
+import { Entity, ViewEntity } from './entity';
 
 
 export class EntityHierarchy {
@@ -32,6 +28,18 @@ export class EntityHierarchy {
             copy.root.forAll( entity => copy.idToEntity[entity.getId()] = entity );
             return copy;
         }
+    }
+
+    public static makeHierarchyView(other:EntityHierarchy) : ViewEntity {
+        return Entity.makeHierarchyView(other.root);
+    }
+
+    public static makeRenderView(other: EntityHierarchy) : Array<ViewEntity> {
+        let renderView: Array<ViewEntity> = [];
+        other.idToEntity.forEach(item => {
+            renderView.push(Entity.makeRenderView(item));
+        })
+        return renderView;
     }
 
     public static addEntity(
