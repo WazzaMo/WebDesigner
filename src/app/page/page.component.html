@@ -1,4 +1,13 @@
 <div id="page">
-  <div (click)="clickedObject('hi-there', {})">Hi There</div>
-  <div (click)="clickedObject('say-hi', {})">Say Hi</div>
+  <div *ngFor="let view of entityViews;">
+    <visualise-entity [entity-object]="view"></visualise-entity>
+  </div>
+  <ul>
+  <li *ngFor="let item of entityViews;"
+      (click)="onMyClick(item.name)">
+      {{item.name}}
+  </li>
+  </ul>
+  <!--<div (click)="clickedObject('hi-there', {})">Hi There</div>
+  <div (click)="clickedObject('say-hi', {})">Say Hi</div>-->
 </div>

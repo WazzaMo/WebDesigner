@@ -9,18 +9,30 @@
 
 import { Action } from 'redux';
 
-import { ApplicationState } from './application-state';
-import { SelectionAction } from './selection-action';
-import { StateActions } from './state.actions';
-import { Entity } from './entity';
-import { EntityHierarchy } from './entity-hierarchy';
-import { HierarchyAction, HierarchyActionKind } from './hierarchy-action';
-import { EntitySelection } from './entity-selection';
+import {
+    ApplicationState,
+    SelectionAction,
+    StateActions,
+    Entity,
+    EntityComponent,
+    EntityHierarchy,
+    HierarchyAction,
+    HierarchyActionKind,
+    EntitySelection
+} from '.';
 
 
 export const INITIAL_STATE : ApplicationState  = {
     selected: <EntitySelection> { name: '-root-', id: 0, options: {}},
-    hierarchy: new EntityHierarchy()
+    hierarchy: new EntityHierarchy(
+            new Entity('-root-', 0, [
+                {name: 'base', styles: [
+                    {cssKey: 'background-color', cssValue: 'black;'},
+                    {cssKey: 'color', cssValue: 'white'}
+                ]}
+            ]
+        )
+    )
 }
 
 export function rootReducer(

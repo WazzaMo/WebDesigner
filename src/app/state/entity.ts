@@ -24,11 +24,17 @@ export class Entity {
 
     constructor(
         newName: string,
-        newId: number
+        newId: number,
+        newComponents ?: Array<EntityComponent>
     ) {
         this.name = newName;
         this.id = newId;
         this.children = [];
+        if (newComponents) {
+            this.components = newComponents;
+        } else {
+            this.components = [];
+        }
     }
 
     public static copyFrom(other: Entity) : Entity {
@@ -38,15 +44,6 @@ export class Entity {
             value.children.push(child);
         });
         return value;
-    }
-
-    public static makeHierarchyView(other: Entity) : ViewEntity {
-        let root: ViewEntity = {name: other.name, id: other.id, children: [], components:[]};
-        other.children.forEach(item => {
-            let child:ViewEntity = Entity.makeHierarchyView(item);
-            root.children.push(child);
-        });
-        return root;
     }
 
     public static makeRenderView(other: Entity) : ViewEntity {

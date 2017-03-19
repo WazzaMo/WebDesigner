@@ -6,7 +6,12 @@
  * See https://www.gnu.org/licenses/lgpl.md
  */
 
+export interface Style {
+    cssKey: string;
+    cssValue: string;
+}
+
 export interface EntityComponent {
     name: string;
-    styles: Array<string>;
+    styles: Array<Style>;
 }

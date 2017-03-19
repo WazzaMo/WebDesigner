@@ -14,8 +14,8 @@ export class EntityHierarchy {
     private root: Entity;
     private idToEntity: Array<Entity>;
 
-    public constructor() {
-        this.root = new Entity('root', 0);
+    public constructor(root ?: Entity) {
+        this.root = typeof(root) === 'undefined' ? new Entity('root', 0) : root;
         this.idToEntity= [this.root];
     }
 
@@ -30,8 +30,13 @@ export class EntityHierarchy {
         }
     }
 
-    public static makeHierarchyView(other:EntityHierarchy) : ViewEntity {
-        return Entity.makeHierarchyView(other.root);
+    public static makeHierarchyView(other:EntityHierarchy) : Array<ViewEntity> {
+        let view: Array<ViewEntity> = [];
+
+        other.idToEntity.forEach( (entity: Entity, id: number) => {
+            view.push(Entity.makeRenderView(entity));
+        });
+        return view;
     }
 
     public static makeRenderView(other: EntityHierarchy) : Array<ViewEntity> {

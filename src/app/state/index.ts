@@ -15,6 +15,7 @@ export * from './entity-component';
 export * from './entity';
 export * from './entity-hierarchy';
 export * from './state.actions';
+export * from './hierarchy-action';
 
 export {
     INITIAL_STATE,

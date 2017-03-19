@@ -44,7 +44,7 @@ export class PageComponent implements OnInit {
   private _templateRoot: JQueryElement;
   private pageRoot : Array<JQueryNode>;
   private firstDiv : JQueryNode;
-  private reduxSubscription: Subscription;
+  private entityViewSubscription: Subscription;
   private entityViews: Array<ViewEntity>;
 
   constructor(
@@ -58,6 +58,7 @@ export class PageComponent implements OnInit {
     this._templateRoot = this.jqueryFactory.createJQueryElement(this.pageElement);
     this.pageRoot = this._templateRoot.find('#page');
     this.getPage();
+    this.setupEntityView();
   }
 
   private getPage() : void {
@@ -70,8 +71,8 @@ export class PageComponent implements OnInit {
     }
   }
 
-  private setupForRedux() :void {
-    this.reduxSubscription = this.ngRedux.select<EntityHierarchy>('hierarchy')
+  private setupEntityView() :void {
+    this.entityViewSubscription = this.ngRedux.select<EntityHierarchy>('hierarchy')
       .subscribe( hierarchyValue => this.entityViews = EntityHierarchy.makeRenderView(hierarchyValue));
   }
 
@@ -79,7 +80,8 @@ export class PageComponent implements OnInit {
     this.firstDiv.css('color', color);
   }
 
-  public clickedObject(name: string, options: Options) {
-    this.ngRedux.dispatch( this.stateActions.select(<EntitySelection>{name: name, options: options}) );
+
+  public onMyClick(event: any) : void {
+    console.log(event);
   }
 }

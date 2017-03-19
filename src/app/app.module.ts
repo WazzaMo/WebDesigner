@@ -23,12 +23,14 @@ import { rootReducer, INITIAL_STATE } from './state/store';
 import { StateActions } from './state/state.actions';
 
 import { JQueryElement, JQueryElementImpl, JQueryElementFactory } from './jquery/jquery-element';
+import { VisualiseEntityComponent } from './visualise-entity/visualise-entity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageComponent,
-    InspectorComponent
+    InspectorComponent,
+    VisualiseEntityComponent
   ],
   imports: [
     BrowserModule,  
